@@ -1,61 +1,584 @@
 <!DOCTYPE html>
+
+
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Мой первый сайт</title>
+    <title>AutoDrive — Автомобильный портал</title>
 
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #101020;
-            color: white;
-            text-align: center;
-        }
 
-        header {
-            padding: 25px;
-            background: #191933;
-        }
+<style>
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
 
-        h1 {
-            color: #a78bfa;
-        }
+html {
+scroll-behavior: smooth;
+}
 
-        main {
-            padding: 60px 20px;
-        }
+body {
+font-family: Arial, sans-serif;
+background: #090909;
+color: #fff;
+}
 
-        button {
-            padding: 15px 25px;
-            border: none;
-            border-radius: 10px;
-            background: #8b5cf6;
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-        }
+:root {
+--red: #ff1717;
+--gray: #a5a5a5;
+--panel: #151515;
+}
 
-        button:hover {
-            background: #6d28d9;
-        }
-    </style>
+header {
+position: sticky;
+top: 0;
+z-index: 10;
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 22px 7%;
+background: #101010ee;
+border-bottom: 1px solid #292929;
+backdrop-filter: blur(12px);
+}
+
+.logo {
+font-size: 27px;
+font-weight: 900;
+font-style: italic;
+}
+
+.logo span {
+color: var(--red);
+}
+
+nav {
+display: flex;
+gap: 30px;
+}
+
+nav a {
+color: #ccc;
+text-decoration: none;
+font-size: 15px;
+transition: 0.3s;
+}
+
+nav a:hover {
+color: var(--red);
+}
+
+.hero {
+min-height: 570px;
+display: flex;
+align-items: center;
+padding: 70px 7%;
+position: relative;
+overflow: hidden;
+
+background:
+linear-gradient(90deg, #090909 0%, #090909dd 35%, #09090922 100%),
+linear-gradient(0deg, #090909 0%, transparent 30%),
+url("https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1800&q=85");
+
+background-size: cover;
+background-position: center;
+}
+
+.hero-content {
+max-width: 600px;
+position: relative;
+z-index: 1;
+}
+
+.eyebrow {
+color: var(--red);
+text-transform: uppercase;
+letter-spacing: 4px;
+font-size: 13px;
+font-weight: bold;
+margin-bottom: 20px;
+}
+
+h1 {
+font-size: clamp(42px, 6vw, 76px);
+line-height: 1.05;
+font-weight: 900;
+font-style: italic;
+margin-bottom: 25px;
+}
+
+h1 span {
+color: var(--red);
+}
+
+.hero p {
+color: #bbb;
+line-height: 1.7;
+font-size: 17px;
+max-width: 480px;
+}
+
+.button {
+display: inline-block;
+margin-top: 30px;
+padding: 17px 28px;
+background: var(--red);
+color: white;
+text-decoration: none;
+border-radius: 8px;
+font-weight: bold;
+transition: 0.3s;
+}
+
+.button:hover {
+transform: translateY(-4px);
+box-shadow: 0 8px 30px #ff171755;
+background: #d90000;
+}
+
+.features {
+display: grid;
+grid-template-columns: repeat(4, 1fr);
+gap: 18px;
+padding: 35px 7%;
+}
+
+.feature {
+display: flex;
+align-items: center;
+gap: 18px;
+padding: 25px;
+background: var(--panel);
+border: 1px solid #292929;
+border-radius: 12px;
+transition: 0.3s;
+}
+
+.feature:hover {
+border-color: var(--red);
+transform: translateY(-5px);
+}
+
+.feature-icon {
+font-size: 30px;
+color: var(--red);
+}
+
+.feature h3 {
+font-size: 17px;
+margin-bottom: 8px;
+}
+
+.feature p {
+color: var(--gray);
+font-size: 13px;
+line-height: 1.5;
+}
+
+.section {
+padding: 55px 7%;
+}
+
+.section-heading {
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-bottom: 30px;
+}
+
+.section-heading h2 {
+font-size: 32px;
+font-style: italic;
+}
+
+.section-heading h2::before {
+content: "";
+display: inline-block;
+width: 7px;
+height: 30px;
+background: var(--red);
+margin-right: 15px;
+transform: skew(-20deg);
+}
+
+.section-heading a {
+color: var(--red);
+text-decoration: none;
+font-weight: bold;
+}
+
+.cars {
+display: grid;
+grid-template-columns: repeat(4, 1fr);
+gap: 20px;
+}
+
+.car-card {
+background: var(--panel);
+border: 1px solid #292929;
+border-radius: 12px;
+overflow: hidden;
+transition: 0.3s;
+}
+
+.car-card:hover {
+transform: translateY(-7px);
+border-color: var(--red);
+}
+
+.car-image {
+height: 190px;
+overflow: hidden;
+background: #222;
+}
+
+.car-image img {
+width: 100%;
+height: 100%;
+object-fit: cover;
+transition: 0.5s;
+}
+
+.car-card:hover img {
+transform: scale(1.07);
+}
+
+.car-info {
+padding: 20px;
+}
+
+.car-info h3 {
+font-size: 18px;
+margin-bottom: 10px;
+}
+
+.car-info p {
+color: var(--gray);
+font-size: 14px;
+line-height: 1.5;
+}
+
+.car-link {
+display: inline-block;
+margin-top: 15px;
+color: var(--red);
+text-decoration: none;
+font-size: 14px;
+font-weight: bold;
+}
+
+.about {
+margin: 30px 7% 70px;
+padding: 45px;
+background:
+linear-gradient(100deg, #171717, #101010);
+border: 1px solid #292929;
+border-left: 4px solid var(--red);
+border-radius: 12px;
+}
+
+.about h2 {
+font-size: 30px;
+margin-bottom: 20px;
+}
+
+.about p {
+max-width: 750px;
+color: var(--gray);
+line-height: 1.8;
+}
+
+footer {
+padding: 30px 7%;
+border-top: 1px solid #292929;
+display: flex;
+justify-content: space-between;
+gap: 20px;
+color: #777;
+font-size: 14px;
+}
+
+footer span {
+color: var(--red);
+letter-spacing: 3px;
+font-weight: bold;
+}
+
+@media (max-width: 950px) {
+.features {
+grid-template-columns: repeat(2, 1fr);
+}
+
+.cars {
+grid-template-columns: repeat(2, 1fr);
+}
+}
+
+@media (max-width: 600px) {
+header {
+flex-direction: column;
+gap: 20px;
+}
+
+nav {
+gap: 15px;
+flex-wrap: wrap;
+justify-content: center;
+}
+
+nav a {
+font-size: 13px;
+}
+
+.hero {
+min-height: 500px;
+padding: 50px 7%;
+background-position: 60% center;
+}
+
+.features {
+grid-template-columns: 1fr;
+}
+
+.cars {
+grid-template-columns: 1fr;
+}
+
+.section-heading h2 {
+font-size: 24px;
+}
+
+.section-heading a {
+font-size: 12px;
+}
+
+.about {
+padding: 25px;
+}
+
+footer {
+flex-direction: column;
+text-align: center;
+}
+}
+</style>
+
 </head>
 
+
 <body>
-    <header>
-        <h1>Мой первый сайт</h1>
-        <p>Добро пожаловать!</p>
-    </header>
 
-    <main>
-        <h2>Привет, интернет!</h2>
-        <p>Это мой собственный сайт, созданный с нуля.</p>
 
-        <button onclick="alert('Ты нажал на кнопку!')">
-            Нажми меня
-        </button>
-    </main>
+<header>
+<div class="logo">Auto<span>Drive</span></div>
+
+<nav>
+<a href="#home">Главная</a>
+<a href="#projects">Проекты</a>
+<a href="#gallery">Галерея</a>
+<a href="#about">О сайте</a>
+</nav>
+</header>
+
+<section class="hero" id="home">
+<div class="hero-content">
+<div class="eyebrow">Мир автомобильной культуры</div>
+
+<h1>
+Автомобили.<br>
+Тюнинг.<br>
+<span>Стиль.</span>
+</h1>
+
+<p>
+Добро пожаловать на AutoDrive!
+Здесь ты найдёшь автомобильные проекты,
+идеи для тюнинга и красивые машины.
+</p>
+
+<a href="#projects" class="button">
+Перейти к проектам →
+</a>
+</div>
+</section>
+
+<section class="features">
+<div class="feature">
+<div class="feature-icon">🔧</div>
+<div>
+<h3>Тюнинг</h3>
+<p>Советы и идеи по улучшению авто</p>
+</div>
+</div>
+
+<div class="feature">
+<div class="feature-icon">🚘</div>
+<div>
+<h3>Проекты</h3>
+<p>Мои работы и автомобильные сборки</p>
+</div>
+</div>
+
+<div class="feature">
+<div class="feature-icon">📷</div>
+<div>
+<h3>Галерея</h3>
+<p>Красивые фотографии автомобилей</p>
+</div>
+</div>
+
+<div class="feature">
+<div class="feature-icon">📰</div>
+<div>
+<h3>Новости</h3>
+<p>Интересное из мира автомобилей</p>
+</div>
+</div>
+</section>
+
+<section class="section" id="projects">
+<div class="section-heading">
+<h2>Последние проекты</h2>
+<a href="#gallery">Вся галерея →</a>
+</div>
+
+<div class="cars">
+<div class="car-card">
+<div class="car-image">
+<img
+                        src="https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?auto=format&fit=crop&w=800&q=80"
+                        alt="Автомобиль ВАЗ"
+                    >
+</div>
+<div class="car-info">
+<h3>ВАЗ-2107</h3>
+<p>Классика, которая не стареет.</p>
+<a href="#about" class="car-link">Подробнее →</a>
+</div>
+</div>
+
+<div class="car-card">
+<div class="car-image">
+<img
+                        src="https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=800&q=80"
+                        alt="BMW"
+                    >
+</div>
+<div class="car-info">
+<h3>BMW E36</h3>
+<p>Легенда на дороге.</p>
+<a href="#about" class="car-link">Подробнее →</a>
+</div>
+</div>
+
+<div class="car-card">
+<div class="car-image">
+<img
+                        src="https://images.unsplash.com/photo-1614200187524-dc4b892acf16?auto=format&fit=crop&w=800&q=80"
+                        alt="Спортивный автомобиль"
+                    >
+</div>
+<div class="car-info">
+<h3>Toyota Supra</h3>
+<p>Икона автомобильной культуры.</p>
+<a href="#about" class="car-link">Подробнее →</a>
+</div>
+</div>
+
+<div class="car-card">
+<div class="car-image">
+<img
+                        src="https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=800&q=80"
+                        alt="Mercedes-Benz"
+                    >
+</div>
+<div class="car-info">
+<h3>Mercedes-Benz</h3>
+<p>Мощь, комфорт и стиль.</p>
+<a href="#about" class="car-link">Подробнее →</a>
+</div>
+</div>
+</div>
+</section>
+
+<section class="section" id="gallery">
+<div class="section-heading">
+<h2>Автомобильная культура</h2>
+</div>
+
+<div class="cars">
+<div class="car-card">
+<div class="car-image">
+<img
+                        src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=800&q=80"
+                        alt="Автомобиль на дороге"
+                    >
+</div>
+<div class="car-info">
+<h3>На дороге</h3>
+<p>Машины, скорость и эмоции.</p>
+</div>
+</div>
+
+<div class="car-card">
+<div class="car-image">
+<img
+                        src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=800&q=80"
+                        alt="Спортивный автомобиль"
+                    >
+</div>
+<div class="car-info">
+<h3>Дизайн</h3>
+<p>Красота в каждой детали.</p>
+</div>
+</div>
+
+<div class="car-card">
+<div class="car-image">
+<img
+                        src="https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?auto=format&fit=crop&w=800&q=80"
+                        alt="Автомобильный проект"
+                    >
+</div>
+<div class="car-info">
+<h3>Сборки</h3>
+<p>Индивидуальность и характер.</p>
+</div>
+</div>
+
+<div class="car-card">
+<div class="car-image">
+<img
+                        src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=800&q=80"
+                        alt="Автомобиль"
+                    >
+</div>
+<div class="car-info">
+<h3>Автомобили</h3>
+<p>Мир машин без границ.</p>
+</div>
+</div>
+</div>
+</section>
+
+<section class="about" id="about">
+<h2>О проекте AutoDrive</h2>
+<p>
+AutoDrive — мой личный автомобильный сайт.
+Здесь я собираю интересные автомобили, идеи тюнинга
+и проекты, которые вдохновляют меня.
+Это место для всех, кто любит машины и автомобильную культуру.
+</p>
+</section>
+
+<footer>
+<div>© 2026 AutoDrive. Все права защищены.</div>
+<span>ДВИГАЙСЯ К МЕЧТЕ 🚀</span>
+</footer>
+
 </body>
 </html>
+```
